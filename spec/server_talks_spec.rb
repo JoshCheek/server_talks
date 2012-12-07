@@ -18,15 +18,18 @@ describe ServerTalks do
   end
 
   describe 'the generated class' do
-    let(:server) { ServerTalks.new }
+    let(:server) { ServerTalks.build_server }
 
     context 'when handling a url' do
       it 'invokes blocks for the url' do
         num = 0
-        server.url('/') { num = 1 }
+        server.url('/a') { num += 5 }
+        server.url('/b') { num += 10 }
         num.should == 0
-        server.new('/').result
-        num.should == 1
+        server.new('/a').result
+        num.should == 5
+        server.new('/b').result
+        num.should == 15
       end
 
       it 'returns whatever the block returns' do
