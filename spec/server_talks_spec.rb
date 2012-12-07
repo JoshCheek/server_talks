@@ -18,6 +18,8 @@ describe ServerTalks do
   end
 
   describe 'the generated class' do
+    let(:server) { ServerTalks.new }
+
     context 'when handling a url' do
       it 'invokes blocks for the url' do
         num = 0
